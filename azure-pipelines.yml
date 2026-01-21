@@ -34,14 +34,21 @@ stages:
         artifact: 'my-java'
         publishLocation: 'pipeline'
 
+- stage: 
+  jobs:
+  - job: 
+    steps:
     - task: DownloadPipelineArtifact@2
       inputs:
         buildType: 'current'
         artifactName: 'my-java'
         targetPath: '$(Pipeline.Workspace)/my-java'
 
-# - stage: 
-#   jobs:
-#   - job: 
-#     steps:
 
+    - task: CopyFilesOverSSH@0
+      inputs:
+        sshEndpoint: 'my-java-vm'
+        sourceFolder: '$(Pipeline.Workspace)/my-java'
+        contents: '**'
+        targetFolder: '/home/ambition'
+        readyTimeout: '20000'
