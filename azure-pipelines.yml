@@ -38,7 +38,7 @@ stages:
       inputs:
         buildType: 'current'
         artifactName: 'my-java'
-        targetPath: '$(Pipeline.Workspace)'
+        targetPath: '$(Pipeline.Workspace)/my-java'
 
 # - stage: 
 #   jobs:
