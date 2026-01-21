@@ -8,25 +8,26 @@ stages:
   jobs:
   - job: 
     steps:
-    - task: Maven@4
-      inputs:
-        azureSubscription: 'gusi-sc'
-        mavenPomFile: 'pom.xml'
-        goals: 'mvn clean package'
-        publishJUnitResults: true
-        testResultsFiles: '**/surefire-reports/TEST-*.xml'
-        javaHomeOption: 'JDKVersion'
-        mavenVersionOption: 'Default'
-        mavenAuthenticateFeed: false
-        effectivePomSkip: false
-        sonarQubeRunAnalysis: false
-
-    # - task: PowerShell@2
+    # - task: Maven@4
     #   inputs:
-    #     targetType: 'inline'
-    #     script: |
-    #       # Pre-check if MAVEN is already installed . . .
-    #       mvn --version
+    #     azureSubscription: 'gusi-sc'
+    #     mavenPomFile: 'pom.xml'
+    #     goals: 'mvn clean package'
+    #     publishJUnitResults: true
+    #     testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    #     javaHomeOption: 'JDKVersion'
+    #     mavenVersionOption: 'Default'
+    #     mavenAuthenticateFeed: false
+    #     effectivePomSkip: false
+    #     sonarQubeRunAnalysis: false
+
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Pre-check if MAVEN is already installed . . .
+          mvn --version
+          mvn clean package
 
     - task: PublishPipelineArtifact@1
       displayName: Publish Artifacts
