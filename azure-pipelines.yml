@@ -8,24 +8,25 @@ stages:
   jobs:
   - job: 
     steps:
-    # - task: Maven@4
-    #   inputs:
-    #     azureSubscription: 'gusi-sc'
-    #     mavenPomFile: 'pom.xml'
-    #     publishJUnitResults: true
-    #     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    #     javaHomeOption: 'JDKVersion'
-    #     mavenVersionOption: 'Default'
-    #     mavenAuthenticateFeed: false
-    #     effectivePomSkip: false
-    #     sonarQubeRunAnalysis: false
-
-    - task: PowerShell@2
+    - task: Maven@4
       inputs:
-        targetType: 'inline'
-        script: |
-          # Pre-check if MAVEN is already installed . . .
-          mvn --version
+        azureSubscription: 'gusi-sc'
+        mavenPomFile: 'pom.xml'
+        goals: 'mvn clean package'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        javaHomeOption: 'JDKVersion'
+        mavenVersionOption: 'Default'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: false
+
+    # - task: PowerShell@2
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       # Pre-check if MAVEN is already installed . . .
+    #       mvn --version
 
     - task: PublishPipelineArtifact@1
       displayName: Publish Artifacts
@@ -34,22 +35,23 @@ stages:
         artifact: 'my-java'
         publishLocation: 'pipeline'
 
-- stage: 
-  jobs:
-  - job: 
-    steps:
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        buildType: 'current'
-        artifactName: 'my-java'
-        itemPattern: '*.war'
-        targetPath: '$(Pipeline.Workspace)/my-java'
+
+# - stage: 
+#   jobs:
+#   - job: 
+#     steps:
+#     - task: DownloadPipelineArtifact@2
+#       inputs:
+#         buildType: 'current'
+#         artifactName: 'my-java'
+#         itemPattern: '*.war'
+#         targetPath: '$(Pipeline.Workspace)/my-java'
 
 
-    - task: CopyFilesOverSSH@0
-      inputs:
-        sshEndpoint: 'my-java-vm'
-        sourceFolder: '$(Pipeline.Workspace)/my-java'
-        contents: '*.war'
-        targetFolder: '/home/ambition'
-        readyTimeout: '20000'
+#     - task: CopyFilesOverSSH@0
+#       inputs:
+#         sshEndpoint: 'my-java-vm'
+#         sourceFolder: '$(Pipeline.Workspace)/my-java'
+#         contents: '*.war'
+#         targetFolder: '/home/ambition'
+#         readyTimeout: '20000'
