@@ -49,6 +49,6 @@ stages:
       inputs:
         sshEndpoint: 'my-java-vm'
         sourceFolder: '$(Pipeline.Workspace)/my-java'
-        contents: '**'
+        contents: '*.war'''
         targetFolder: '/home/ambition'
         readyTimeout: '20000'
