@@ -32,7 +32,7 @@ stages:
     - task: PublishPipelineArtifact@1
       displayName: Publish Artifacts
       inputs:
-        targetPath: '$(Pipeline.Workspace)'
+        targetPath: '$(Pipeline.Workspace)/target'
         artifact: 'my-java'
         publishLocation: 'pipeline'
 
