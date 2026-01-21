@@ -27,6 +27,12 @@ stages:
           # Pre-check if MAVEN is already installed . . .
           mvn --version
 
+    - task: PublishPipelineArtifact@1
+      displayName: Publish Artifacts
+      inputs:
+        targetPath: '$(Pipeline.Workspace)'
+        artifact: 'my-java'
+        publishLocation: 'pipeline'
 
 
 # - stage: 
