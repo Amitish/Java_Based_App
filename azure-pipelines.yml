@@ -48,17 +48,24 @@ stages:
         targetPath: '$(System.DefaultWorkingDirectory)/target'
 
 
-    - task: CopyFilesOverSSH@0
-      inputs:
-        sshEndpoint: 'my-java-vm'
-        sourceFolder: '$(System.DefaultWorkingDirectory)/target'
-        contents: '*.war'
-        targetFolder: '/home/ambition'
-        readyTimeout: '20000'
+# Using CopyFilesOverSSH & SSH . . . . . . . . . . . . . . . . . . . 
 
-    - task: SSH@0
-      inputs:
-        sshEndpoint: 'my-java-vm'
-        runOptions: 'inline'
-        inline: 'sudo cp -r /home/ambition/* /var/lib/tomcat10/webapps/'
-        readyTimeout: '20000'
+    # - task: CopyFilesOverSSH@0
+    #   inputs:
+    #     sshEndpoint: 'my-java-vm'
+    #     sourceFolder: '$(System.DefaultWorkingDirectory)/target'
+    #     contents: '*.war'
+    #     targetFolder: '/home/ambition'
+    #     readyTimeout: '20000'
+
+    # - task: SSH@0
+    #   inputs:
+    #     sshEndpoint: 'my-java-vm'
+    #     runOptions: 'inline'
+    #     inline: 'sudo cp -r /home/ambition/* /var/lib/tomcat10/webapps/'
+    #     readyTimeout: '20000'
+
+
+# Using ENVIRONMENT . . . . . . . . . . . . . . . . . . . . . . . .
+
+
