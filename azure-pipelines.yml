@@ -37,15 +37,18 @@ stages:
         publishLocation: 'pipeline'
 
 
-- stage: 
-  jobs:
-  - job: 
-    steps:
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        buildType: 'current'
-        artifactName: 'my-java'
-        targetPath: '$(System.DefaultWorkingDirectory)/target'
+# ================= DEPLOY =================
+
+
+# - stage: 
+#   jobs:
+#   - job: 
+#     steps:
+#     - task: DownloadPipelineArtifact@2
+#       inputs:
+#         buildType: 'current'
+#         artifactName: 'my-java'
+#         targetPath: '$(System.DefaultWorkingDirectory)/target'
 
 
 # Using CopyFilesOverSSH & SSH . . . . . . . . . . . . . . . . . . . 
@@ -67,5 +70,9 @@ stages:
 
 
 # Using ENVIRONMENT . . . . . . . . . . . . . . . . . . . . . . . .
+
+# - stage: 
+#   jobs:
+  
 
 
