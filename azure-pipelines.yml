@@ -37,22 +37,21 @@ stages:
         publishLocation: 'pipeline'
 
 
-# - stage: 
-#   jobs:
-#   - job: 
-#     steps:
-#     - task: DownloadPipelineArtifact@2
-#       inputs:
-#         buildType: 'current'
-#         artifactName: 'my-java'
-#         itemPattern: '*.war'
-#         targetPath: '$(Pipeline.Workspace)/my-java'
+- stage: 
+  jobs:
+  - job: 
+    steps:
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        artifactName: 'my-java'
+        targetPath: '$(System.DefaultWorkingDirectory)/target'
 
 
-#     - task: CopyFilesOverSSH@0
-#       inputs:
-#         sshEndpoint: 'my-java-vm'
-#         sourceFolder: '$(Pipeline.Workspace)/my-java'
-#         contents: '*.war'
-#         targetFolder: '/home/ambition'
-#         readyTimeout: '20000'
+    # - task: CopyFilesOverSSH@0
+    #   inputs:
+    #     sshEndpoint: 'my-java-vm'
+    #     sourceFolder: '$(Pipeline.Workspace)/my-java'
+    #     contents: '*.war'
+    #     targetFolder: '/home/ambition'
+    #     readyTimeout: '20000'
