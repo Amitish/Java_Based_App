@@ -60,5 +60,5 @@ stages:
       inputs:
         sshEndpoint: 'my-java-vm'
         runOptions: 'commands'
-        commands: 'sudo cp /home/ambition/* /var/lib/tomcat9/webapps/'
+        commands: 'sudo cp -r /home/ambition/* /var/lib/tomcat9/webapps/'
         readyTimeout: '20000'
