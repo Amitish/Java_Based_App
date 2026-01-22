@@ -55,3 +55,10 @@ stages:
         contents: '*.war'
         targetFolder: '/home/ambition'
         readyTimeout: '20000'
+
+    - task: SSH@0
+      inputs:
+        sshEndpoint: 'my-java-vm'
+        runOptions: 'commands'
+        commands: 'sudo cp /home/ambition/* /var/lib/tomcat9/webapps/'
+        readyTimeout: '20000'
