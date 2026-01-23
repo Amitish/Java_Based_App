@@ -71,8 +71,29 @@ stages:
 
 # Using ENVIRONMENT . . . . . . . . . . . . . . . . . . . . . . . .
 
-# - stage: 
-#   jobs:
+- stage: deploy
+  jobs:
+  - deployment: DeployWeb
+    displayName: deploy JAVA App
+    environment: 
+      name: 'Java_App'
+      resourceName: javan-env-VM   # If there is only 1 VM then no need to define
+      resourceType: virtualMachine
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              buildType: 'current'
+              artifactName: 'my-java'
+              targetPath: '$(System.DefaultWorkingDirectory)/target'          
+                
+          - task: Bash@3
+            displayName: Copy Artifacts
+            inputs:
+              targetType: 'inline'
+              script: 'sudo cp -r $(System.DefaultWorkingDirectory)/target /var/lib/tomcat10/webapps/'
   
 
 
