@@ -93,7 +93,7 @@ stages:
             displayName: Copy Artifacts
             inputs:
               targetType: 'inline'
-              script: 'sudo cp -r $(System.DefaultWorkingDirectory)/target /var/lib/tomcat10/webapps/'
+              script: 'sudo cp -r $(System.DefaultWorkingDirectory)/target/*war /var/lib/tomcat10/webapps/'
   
 
 
