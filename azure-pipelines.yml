@@ -77,7 +77,7 @@ stages:
     displayName: deploy JAVA App
     environment: 
       name: 'Java_App'
-      resourceName: javan-env-VM   # If there is only 1 VM then no need to define
+      resourceName: javan-env-VM   # If we have multiple VM to deploy same then not need to define
       resourceType: virtualMachine
     strategy:
       runOnce:
